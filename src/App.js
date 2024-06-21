@@ -1,25 +1,46 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useContext } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { AppProvider, AppContext } from './contexts/AppContext';
+import DrinkSelection from './components/DrinkSelection';
+import PaymentSelection from './components/PaymentSelection';
+import CashPayment from './components/CashPayment';
+import CardPayment from './components/CardPayment';
+import Preparation from './components/Preparation';
+import Promo from './components/Promo';
+import './styles/App.css';
 
-function App() {
+const AppContent = () => {
+  const { currentStep } = useContext(AppContext);
+
+  switch (currentStep) {
+    case 'drinkSelection':
+      return <DrinkSelection />;
+    case 'paymentSelection':
+      return <PaymentSelection />;
+    case 'cashPayment':
+      return <CashPayment />;
+    case 'cardPayment':
+      return <CardPayment />;
+    case 'preparation':
+      return <Preparation />;
+    default:
+      return <Promo />;
+  }
+};
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AppProvider>
+      <Router>
+        <div className="App">
+          <Routes>
+            <Route path="/" element={<Promo />} />
+            <Route path="*" element={<AppContent />} />
+          </Routes>
+        </div>
+      </Router>
+    </AppProvider>
   );
-}
+};
 
 export default App;

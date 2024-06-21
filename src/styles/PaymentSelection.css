@@ -1,0 +1,18 @@
+.payment-selection {
+  text-align: center;
+}
+
+.payment-button {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.payment-button:hover {
+  background-color: #2980b9;
+}
